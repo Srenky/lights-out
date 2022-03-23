@@ -1,8 +1,22 @@
 .lightOff {
-    border: none;
+    border-style: solid;
     background-color: lightgray;
     border-radius: 50%;
     border-color: lightgray;
+    border-width: 5px;
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    margin: 3px;
+}
+
+.lightOffSolution {
+    background-color: lightgray;
+    border-style: solid;
+    border-radius: 50%;
+    border-color: green;
+    border-width: 5px;
     width: 50px;
     height: 50px;
     max-width: 50px;
@@ -11,10 +25,24 @@
 }
 
 .lightOn {
-    border: none;
+    border-style: solid;
     background-color: yellow;
     border-radius: 50%;
     border-color: yellow;
+    border-width: 5px;
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    margin: 3px;
+}
+
+.lightOnSolution {
+    border-style: solid;
+    background-color: yellow;
+    border-radius: 50%;
+    border-color: green;
+    border-width: 5px;
     width: 50px;
     height: 50px;
     max-width: 50px;

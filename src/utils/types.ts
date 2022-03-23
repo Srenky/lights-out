@@ -3,4 +3,4 @@ export enum CellState {
     on
   }
 
-export type Cell = { state: CellState }
+export type Cell = { state: CellState, solution: boolean }

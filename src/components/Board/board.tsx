@@ -1,6 +1,6 @@
 import React from "react";
 import { Light } from "../Light/light";
-import { generateCells, toggleLight, toggleAdjacentLights, isSolved } from "../../utils/helpers"
+import { generateCells, toggleLight, toggleAdjacentLights, isSolved, solve } from "../../utils/helpers"
 import { Cell } from "../../utils/types";
 import './board.css'
 
@@ -17,6 +17,7 @@ export const Board: React.FC = () => {
         let newBoard = board.slice();
 
         toggleLight(newBoard[row][col]);
+        if (newBoard[row][col].solution) newBoard[row][col].solution = false;
         toggleAdjacentLights(newBoard, row, col);
 
         setBoard(newBoard);
@@ -34,9 +35,8 @@ export const Board: React.FC = () => {
         setBoard(generateCells(size, size));
     }
 
-    // TODO
     const handleSolutionClick = () => (): void => {
-        
+        if (!won) setBoard(solve(board));
     }
 
     const renderCells = (): React.ReactNode => {
@@ -48,6 +48,7 @@ export const Board: React.FC = () => {
                         col={colIdx}
                         onClick={handleLightClick}
                         state={cell.state}
+                        solution={cell.solution}
                     />
                 )}
             </div>
