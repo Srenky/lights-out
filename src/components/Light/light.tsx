@@ -13,6 +13,7 @@ interface LightProps {
 export const Light: React.FC<LightProps> = 
     ({col, onClick, row, state}
 )=> {
+    
     const renderLight = (): React.ReactNode => {
         if (state === CellState.off) {
             return <button className="lightOff" onClick={onClick(row, col)}></button>

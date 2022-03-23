@@ -1,5 +1,39 @@
+.Body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .Board {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10%;
+}
+
+.Header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #333;
+    padding: 10px;
+    border-radius: 10%; */
+}
+
+.generateButton{
+    width: fit-content;
+    border-radius: 5%;
+    margin: 10px;
+    font-size: 20px;
+    height: 35px;
+}
+
+select {
+    border-radius: 10%;
+    margin: 10px;
+    font-size: 20px;
+}
+
+label {
+    font-size: 20px;
+    color: white;
 }

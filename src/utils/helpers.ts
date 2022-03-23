@@ -1,17 +1,19 @@
 import { Cell, CellState } from "./types";
 
 
-export const generateCells = (): Cell[][] => {
+export const generateCells = (rows: number, cols: number): Cell[][] => {
     let cells: Cell[][] = [];
 
-    for (let row = 0; row < 3; row++) {
+    for (let row = 0; row < rows; row++) {
         cells.push([]);
-        for (let col = 0; col < 3; col++) {
+        for (let col = 0; col < cols; col++) {
             cells[row].push({
                 state: CellState.off
             })
         }
     }
+
+    
 
     return cells;
 }
