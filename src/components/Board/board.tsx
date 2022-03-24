@@ -1,6 +1,6 @@
 import React from "react";
 import { Light } from "../Light/light";
-import { generateCells, toggleLight, toggleAdjacentLights, isSolved, solve } from "../../utils/helpers"
+import { generateCells, toggleLight, toggleAdjacentLights, isSolved, solve, unsolve } from "../../utils/helpers"
 import { Cell } from "../../utils/types";
 import './board.css'
 
@@ -10,6 +10,7 @@ export const Board: React.FC = () => {
     const [board, setBoard] = React.useState<Cell[][]>(generateCells(size, size));
     const [moves, setMoves] = React.useState<number>(1);
     const [won, setWon] = React.useState<boolean>(false);
+    const [checked, setChecked] = React.useState<boolean>(false);
 
     const handleLightClick = (row: number, col: number) => (): void => {
         if (won) return;
@@ -20,7 +21,8 @@ export const Board: React.FC = () => {
         if (newBoard[row][col].solution) newBoard[row][col].solution = false;
         toggleAdjacentLights(newBoard, row, col);
 
-        setBoard(newBoard);
+        if (checked) setBoard(solve(newBoard));
+        else setBoard(unsolve(newBoard));
         setMoves(moves + 1);
 
         if (isSolved(board)) {
@@ -32,12 +34,22 @@ export const Board: React.FC = () => {
     const handleGenerateClick = () => (): void => {
         setMoves(1);
         setWon(false);
-        setBoard(generateCells(size, size));
+
+        var newBoard = generateCells(size, size);
+        if (checked) setBoard(solve(newBoard));
+        else setBoard(unsolve(newBoard));
     }
 
     const handleSolutionClick = () => (): void => {
         if (!won) setBoard(solve(board));
     }
+
+    const handleChange = () => {
+        setChecked(!checked);
+
+        if (!checked) setBoard(solve(board));
+        else setBoard(unsolve(board));
+    };
 
     const renderCells = (): React.ReactNode => {
         return board.map((row, rowIdx) => 
@@ -71,6 +83,14 @@ export const Board: React.FC = () => {
             <div>
                 <button className="actionButton" onClick={handleSolutionClick()}>Solution</button>
                 <button className="actionButton" onClick={handleGenerateClick()}>Generate</button>
+            </div>
+
+            <div>
+                <label htmlFor="solution">
+                    <input type="checkbox" id="solution" name="solution" 
+                        checked={checked} onChange={handleChange}/>
+                    always show solution
+                </label>
             </div>
             
             <div className="Board">

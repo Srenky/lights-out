@@ -64,6 +64,16 @@ export const isSolved = (cells: Cell[][]): boolean => {
     return true;
 }
 
+export const unsolve = (cells: Cell[][]): Cell[][] => {
+    var newCells = cells.slice();
+    for (let row = 0; row < cells.length; row++) {
+        for (let col = 0; col < cells.length; col++) {
+            newCells[row][col].solution = false;
+        }
+    }
+    return newCells;
+}
+
 export const solve = (cells: Cell[][]): Cell[][] => {
     // in this function our main focus is to get our matrix
     // to reduced row echelon form using gaussian elimination
