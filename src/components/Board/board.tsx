@@ -36,15 +36,12 @@ export const Board: React.FC = () => {
         setWon(false);
 
         var newBoard = generateCells(size, size);
+        while (isSolved(newBoard)) newBoard = generateCells(size, size);
         if (checked) setBoard(solve(newBoard));
         else setBoard(unsolve(newBoard));
     }
 
-    const handleSolutionClick = () => (): void => {
-        if (!won) setBoard(solve(board));
-    }
-
-    const handleChange = () => {
+    const handleChangeCheckbox = () => {
         setChecked(!checked);
 
         if (!checked) setBoard(solve(board));
@@ -70,28 +67,33 @@ export const Board: React.FC = () => {
     return (<>
         <div className="Body">
 
-            <div className="Header">
-                <label htmlFor="size">Choose size: </label>
-                <select name="size" id="size" value={size} onChange={(e) => setSize(Number(e.target.value))}>
-                    <option value="3">3x3</option>
-                    <option value="4">4x4</option>
-                    <option value="5">5x5</option>
-                    <option value="6">6x6</option>
-                </select>    
-            </div>
+            <div className="topHeader">
+                <div className="Header">
+                    <div className="Size">
+                        <label htmlFor="size">Choose size: </label>
+                        <select name="size" id="size" value={size} onChange={(e) => {
+                            setSize(Number(e.target.value));
+                            // setBoard(generateCells(Number(e.target.value), Number(e.target.value)));
+                        }}>
+                            <option value="3">3x3</option>
+                            <option value="4">4x4</option>
+                            <option value="5">5x5</option>
+                            <option value="6">6x6</option>
+                        </select>    
+                    </div>
+                    
+                    <button className="actionButton" onClick={handleGenerateClick()}>Generate</button>
 
-            <div>
-                <button className="actionButton" onClick={handleSolutionClick()}>Solution</button>
-                <button className="actionButton" onClick={handleGenerateClick()}>Generate</button>
+                    <div className="Solution">
+                        <label htmlFor="solution">
+                            <input type="checkbox" id="solution" name="solution" 
+                                checked={checked} onChange={handleChangeCheckbox}/>
+                            show solution
+                        </label>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <label htmlFor="solution">
-                    <input type="checkbox" id="solution" name="solution" 
-                        checked={checked} onChange={handleChange}/>
-                    always show solution
-                </label>
-            </div>
+            
             
             <div className="Board">
                 {renderCells()}

@@ -4,31 +4,51 @@
     align-items: center;
 }
 
+.topHeader {
+    position: absolute;
+    top: 2%;
+}
+
+.Header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .Board {
     background-color: #555;
     padding: 10px;
     border-radius: 10%;
 }
 
-.Header {
+.Size {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.Solution {
+    margin: 5px;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
 .actionButton{
     width: fit-content;
     border-radius: 5%;
-    margin: 10px;
+    margin: 5px;
     font-size: 20px;
     height: 35px;
     background-color: #555;
+    color: white;
 }
 
 select {
     border-radius: 10%;
     margin: 10px;
     font-size: 20px;
+    margin-top: 15px;
 }
 
 label {
